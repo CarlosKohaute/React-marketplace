@@ -2,31 +2,15 @@ import { Api } from "helpers/Api";
 
 const parseResponse = (response) => response.json();
 
-const transformCell = (cell) => {
-  const [name] = cell.name;
-
-  return {
-    ...cell,
-    id: cell._id,
-    name: cell.name,
-    name,
-    ...(name && { name }),
-    possuiDescription: Boolean(name),
-  };
-};
-
-const parseTransformList = (response) =>
-  parseResponse(response).then((cells) => cells.map(transformCell));
-
 export const CellService = {
   getList: () =>
-    fetch(Api.cellList(), { method: "GET" }).then(parseTransformList),
+    fetch(Api.cellList(), { method: "GET" }).then(parseResponse),
   getById: (id) =>
-    fetch(Api.cellById(id), { method: "GET" }).then(parseTransformList),
+    fetch(Api.cellById(id), { method: "GET" }).then(parseResponse),
   create: () =>
-    fetch(Api.createCell(), { method: "POST" }).then(parseTransformList),
+    fetch(Api.createCell(), { method: "POST" }).then(parseResponse),
   updtateById: (id) =>
-    fetch(Api.updateCellById(id), { method: "PUT" }).then(parseTransformList),
+    fetch(Api.updateCellById(id), { method: "PUT" }).then(parseResponse),
   deleteById: (id) =>
-    fetch(Api.deleteCellById(id), { method: "DELETE" }).then(parseTransformList),
+    fetch(Api.deleteCellById(id), { method: "DELETE" }).then(parseResponse),
 };
