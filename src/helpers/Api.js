@@ -1,5 +1,5 @@
 const CellContext = {
-  cellEndpoint: () => `${Api.baseUrl}/cells`,
+  cellEndpoint: () => `${Api.baseUrl}`,
   cellList: () => `${CellContext.cellEndpoint()}/find-cells`,
   cellById: (id) => `${CellContext.cellEndpoint()}/find-one-cell/${id}`,
   createCell: () => `${CellContext.cellEndpoint()}/create`,
