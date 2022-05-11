@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { cells } from './mocks/cells.js';
+import { cells } from 'mocks/cells.js';
 import './CellList.css';
 
 function CellList() {

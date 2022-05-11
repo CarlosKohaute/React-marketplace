@@ -1,7 +1,7 @@
-import './Home.css';
-import CellList from 'CellList';
-import sacola from '../assets/icons/sacola.svg';
-import shop from '../assets/shop.svg';
+import '../Home/Home.css';
+import CellList from 'components/CellList/CellList';
+import sacola from 'assets/icons/sacola.svg';
+import shop from 'assets/shop.svg';
 
 function Home() {
   return (
