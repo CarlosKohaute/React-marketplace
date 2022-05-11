@@ -1,35 +1,22 @@
 import './CellListItem.css';
 
-function CellListItem() {
-
-  const itemRemove = (i) => console.log('remove' + i);
-	const itemAdd = (i) => console.log('add' + i);
-	const selectedCell = [0];
-	const index = 0;
-	const cell = {
-		name: "Xiaomi 12 Pro ",
-		description:
-		"Versão global xiaomi 12 pro smartphone 8gb 256gb/12gb 256gb snapdragon 8 gen 1 núcleo octa 6.73 polegada display 120hz 4600mah 120w",
-		photo: require("assets/images/xiaomi12pro.png"),
-		price: 4000,
-		haveDescription: true,
-	}
+function CellListItem({ cell, thaAmountSelected, index, onRemove, onAdd }) {
 
   const badgeCounter = (canRender, index) =>
     Boolean(canRender) && (
-      <span className="CellListItem__badge"> {selectedCell[index]} </span>
+      <span className="CellListItem__badge"> {thaAmountSelected} </span>
     );
 
   const removebutton = (canRender, index) =>
     Boolean(canRender) && (
-      <button className="Actions__remove" onClick={() => itemRemove(index)}>
+      <button className="Actions__remove" onClick={() => onRemove(index)}>
         remover
       </button>
     );
 
   return (
     <div className="CellListItem">
-      {badgeCounter(selectedCell[index], index)}
+      {badgeCounter(thaAmountSelected, index)}
       <div>
         <div className="CellListItem__name">{cell.name}</div>
         <div className="CellListItem__price">{cell.price.toFixed(2)}</div>
@@ -37,13 +24,13 @@ function CellListItem() {
         <div className="CellListItem__actions Actions">
           <button
             className={`Actions__add ${
-              !selectedCell[index] && 'Actions__add-fill'
+              !thaAmountSelected && 'Actions__add-fill'
             }`}
-            onClick={() => itemAdd(index)}
+            onClick={() => onAdd(index)}
           >
             adicionar
           </button>
-          {removebutton(selectedCell[index], index)}
+          {removebutton(thaAmountSelected, index)}
         </div>
       </div>
       <img
