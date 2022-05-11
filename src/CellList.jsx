@@ -9,11 +9,14 @@ function CellList() {
     setSelectedCell({ ...selectedCell, ...cell});
   };
 
+  const badgeCounter = (canRender, index) =>
+	Boolean(canRender) && (<span className="CellListItem__badge"> {selectedCell[index]} </span>);
+
   return (
     <div className="CellList">
       {cells.map((cell, index) => (
         <div className="CellListItem" key={`CellListItem-${index}`}>
-          <span className='CellListItem__badge'>{selectedCell[index] || 0}</span>
+	{badgeCounter(selectedCell[index], index)}
           <div>
             <div className="CellListItem__name">{cell.name}</div>
             <div className="CellListItem__price">{cell.price.toFixed(2)}</div>
