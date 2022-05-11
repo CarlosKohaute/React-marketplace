@@ -9,8 +9,16 @@ function CellList() {
     setSelectedCell({ ...selectedCell, ...cell});
   };
 
+  const itemRemove = (cellIndex) => {
+    const cell = { [cellIndex]: Number(selectedCell[cellIndex] || 0) - 1 };
+    setSelectedCell({ ...selectedCell, ...cell});
+  };
+
   const badgeCounter = (canRender, index) =>
 	Boolean(canRender) && (<span className="CellListItem__badge"> {selectedCell[index]} </span>);
+
+  const removebutton = (canRender, index) =>
+	Boolean(canRender) && (<button className='Actions__remove' onClick={() => itemRemove(index)}>remover</button>);
 
   return (
     <div className="CellList">
@@ -22,10 +30,9 @@ function CellList() {
             <div className="CellListItem__price">{cell.price.toFixed(2)}</div>
             <div className="CellListItem__description">{cell.description}</div>
             <div className="CellListItem__actions Actions">
-              <button className="Actions__add Actions__add-fill " onClick={()=> itemAdd(index)}>
-                Adicionar
-              </button>
-            </div>
+            <button className={`Actions__add ${!selectedCell[index] && "Actions__add-fill"}`} onClick={() => itemAdd(index)}>adicionar</button>
+            {removebutton(selectedCell[index], index)}
+           </div>
           </div>
           <img
             className="CellListItem__photo"
