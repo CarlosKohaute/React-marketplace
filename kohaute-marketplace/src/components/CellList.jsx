@@ -5,7 +5,7 @@ function CellList() {
   return (
     <div className="CellList">
       {cells.map((cell, index) =>(
-      <div className="CellListItem">
+      <div className="CellListItem"   key={`CellListItem-${index}`}>
         <div>
           <div className="CellListItem__name">{cell.name}</div>
           <div className="CellListItem__price">R$ {cell.price.toFixed(2)}</div>
