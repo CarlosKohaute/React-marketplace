@@ -1,4 +1,4 @@
-import CellList from './CellList';
+import CellList from '../components/CellList';
 import './Home.css';
 import sacola from '../assets/icons/sacola.svg';
 import shop from '../assets/shop.svg'
