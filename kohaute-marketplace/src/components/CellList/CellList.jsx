@@ -1,7 +1,7 @@
-import { cells } from 'mocks/cells';
 import React, { useState } from 'react';
+import CellListItem from 'components/CellListItem/CellListItem';
+import { cells } from 'mocks/cells.js';
 import './CellList.css';
-import CellListItem from './CellListItem/CellListItem';
 
 function CellList() {
   const [chosedCell, setChosedCell] = useState({});

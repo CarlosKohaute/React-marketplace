@@ -1,4 +1,4 @@
-import CellList from '../components/CellList';
+import CellList from 'components/CellList/CellList';
 import Navbar from 'components/Navbar/Navbar';
 import './Home.css';
 
