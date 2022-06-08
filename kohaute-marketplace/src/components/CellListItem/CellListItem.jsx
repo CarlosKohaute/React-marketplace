@@ -1,9 +1,22 @@
 import './CellListItem.css';
 
-function CellListItem({ cell, theAmountSelected, index, onRemove, onAdd }) {
+function CellListItem({
+  cell,
+  theAmountSelected,
+  index,
+  onRemove,
+  onAdd,
+  clickItem,
+}) {
   const removeButton = (canRender, index) =>
     Boolean(canRender) && (
-      <button className="Actions__remove" onClick={() => onRemove(index)}>
+      <button
+        className="Actions__remove"
+        onClick={(e) => {
+          e.stopPropagation();
+          onRemove(index);
+        }}
+      >
         remover
       </button>
     );
@@ -13,7 +26,7 @@ function CellListItem({ cell, theAmountSelected, index, onRemove, onAdd }) {
       <span className="CellListItem__badge"> {theAmountSelected} </span>
     );
   return (
-    <div className="CellListItem">
+    <div className="CellListItem" onClick={() => clickItem(cell.id)}>
       {badgeCounter(theAmountSelected, index)}
 
       <div>
@@ -25,7 +38,10 @@ function CellListItem({ cell, theAmountSelected, index, onRemove, onAdd }) {
             className={`Actions__add ${
               !theAmountSelected && 'Actions__add--fill'
             }`}
-            onClick={() => onAdd(index)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onAdd(index);
+            }}
           >
             Adicionar
           </button>

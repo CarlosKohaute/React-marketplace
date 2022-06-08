@@ -8,6 +8,6 @@ const CellContext = {
 };
 
 export const Api = {
-  baseUrl: "https://api-marketplacekohaute.onrender.com",
+  baseUrl: 'https://api-marketplacekohaute.onrender.com',
   ...CellContext,
 };

@@ -7,6 +7,7 @@ import './CellList.css';
 function CellList() {
   const [cells, setCell] = useState([]);
   const [chosedCell, setChosedCell] = useState({});
+  
 
   const [cellModal, setCellModal] = useState(false);
 
@@ -39,6 +40,7 @@ function CellList() {
           index={index}
           onAdd={(index) => itemAdd(index)}
           onRemove={(index) => itemRemove(index)}
+          clickItem={(cellId) => setCellModal(cell)}
         />
       ))}
 

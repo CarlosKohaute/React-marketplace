@@ -35,6 +35,7 @@
 .CellDetailsModal__photo {
   margin-right: -100px;
   z-index: 0;
+  width: 7rem;
 }
 
 @media (max-width: 400px) {
@@ -43,7 +44,7 @@
     height: 100vh;
   }
 
-  .CellDetailsModal__photo {
+  .CellDetailsModal__photo{
     height: 250px;
     margin-top: 50px;
     margin-right: -100px;

@@ -1,8 +1,8 @@
-import './Overlay.css';
+import "./Overlay.css";
 
-function Overlay(children, overlayclick) {
+function Overlay({ children, overlayClick }) {
   return (
-    <div className="Overlay" onClick={() => overlayclick()}>
+    <div className="Overlay" onClick={() => overlayClick()}>
       {children}
     </div>
   );
