@@ -7,7 +7,7 @@ function CellDetailsModal({ cell, closeModal }) {
       <div className="CellDetailsModal">
         <div>
           <div className="CellDetailsModal__name"> {cell.name} </div>
-          <div className="CellDetailsModall__price">
+          <div className="CellDetailsModal__price">
             {' '}
             R$ {Number(cell.price).toFixed(2)}{' '}
           </div>

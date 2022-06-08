@@ -26,6 +26,11 @@ function CellList() {
     setCell(response);
   };
 
+  const getCellById = async (cellId) => {
+    const response = await CellService.getById(cellId);
+    setCellModal(response);
+  };
+
   useEffect(() => {
     getList();
   }, []);
@@ -40,7 +45,7 @@ function CellList() {
           index={index}
           onAdd={(index) => itemAdd(index)}
           onRemove={(index) => itemRemove(index)}
-          clickItem={(cellId) => setCellModal(cell)}
+          clickItem={(cellId) => getCellById(cellId)}
         />
       ))}
 
