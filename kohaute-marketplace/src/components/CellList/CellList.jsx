@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CellListItem from 'components/CellListItem/CellListItem';
-import { cells } from 'mocks/cells.js';
+import { CellService } from 'services/CellService';
 import './CellList.css';
 
 function CellList() {
+  const [cells, setCell] = useState([]);
   const [chosedCell, setChosedCell] = useState({});
 
   const itemAdd = (cellIndex) => {
@@ -15,6 +16,15 @@ function CellList() {
     const cell = { [cellIndex]: Number(chosedCell[cellIndex] || 0) - 1 };
     setChosedCell({ ...chosedCell, ...cell });
   };
+
+  const getList = async () => {
+    const response = await CellService.getList();
+    setCell(response);
+  };
+
+  useEffect(() => {
+    getList();
+  }, []);
 
   return (
     <div className="CellList">
