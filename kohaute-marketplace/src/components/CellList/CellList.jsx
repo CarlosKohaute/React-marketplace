@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import CellListItem from 'components/CellListItem/CellListItem';
 import { CellService } from 'services/CellService';
+import CellDetailsModal from 'components/CellDetailsModal/CellDetailsModal';
 import './CellList.css';
 
 function CellList() {
   const [cells, setCell] = useState([]);
   const [chosedCell, setChosedCell] = useState({});
+
+  const [cellModal, setCellModal] = useState(false);
 
   const itemAdd = (cellIndex) => {
     const cell = { [cellIndex]: (chosedCell[cellIndex] || 0) + 1 };
@@ -38,6 +41,13 @@ function CellList() {
           onRemove={(index) => itemRemove(index)}
         />
       ))}
+
+      {cellModal && (
+        <CellDetailsModal
+          cell={cellModal}
+          closeModal={() => setCellModal(false)}
+        />
+      )}
     </div>
   );
 }

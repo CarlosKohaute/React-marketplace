@@ -1,0 +1,63 @@
+.CellDetailsModal {
+  font-family: "Exo";
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 10px 0px 10px 10px;
+  max-height: 350px;
+  box-sizing: border-box;
+  width: 315px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+
+.CellDetailsModal > div {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.CellDetailsModal__name {
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.CellDetailsModal__description {
+  font-size: 1em;
+}
+
+.CellDetailsModal__price {
+  color: darkviolet;
+  font-size: 2.5em;
+}
+
+.CellDetailsModal__photo {
+  margin-right: -100px;
+  z-index: 0;
+}
+
+@media (max-width: 400px) {
+  .CellDetailsModal {
+    width: 210px;
+    height: 100vh;
+  }
+
+  .CellDetailsModal__photo {
+    height: 250px;
+    margin-top: 50px;
+    margin-right: -100px;
+  }
+
+  .CellDetailsModal__price {
+    font-size: 2em;
+  }
+
+  .CellDetailsModal__name {
+    font-size: 1.5em;
+  }
+
+  .CellDetailsModal__description {
+    font-size: 0.9em;
+  }
+}
