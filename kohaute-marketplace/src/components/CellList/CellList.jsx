@@ -7,7 +7,6 @@ import './CellList.css';
 function CellList() {
   const [cells, setCell] = useState([]);
   const [chosedCell, setChosedCell] = useState({});
-  
 
   const [cellModal, setCellModal] = useState(false);
 
