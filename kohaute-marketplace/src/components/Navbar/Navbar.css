@@ -23,7 +23,7 @@
 .Logo__tittle {
   position: absolute;
   left: 5px;
-  font-family: "Exo";
+  font-family: 'Exo';
   font-weight: 500;
   font-size: 2em;
 }
@@ -59,6 +59,19 @@
   right: 0;
 }
 
+.Options {
+  display: flex;
+}
+
+.Cell {
+  background: none;
+  border: none;
+}
+
+.Cell__icon {
+  cursor: pointer;
+}
+
 @media (max-width: 1220px) {
   .Header {
     max-width: 720px;
@@ -68,6 +81,22 @@
 @media (max-width: 840px) {
   .Header {
     max-width: 320px;
+  }
+  .row {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+  .Logo{
+    margin-left: 2rem;
+    width: 15rem;
+  }
+  .Logo__icon{
+    margin-left: 1.5rem;
+  }
+  .Logo__tittle{
+    margin-left: 1.5rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -81,6 +110,11 @@
   }
 
   .Logo__tittle {
+    margin-left: 0.5rem;
     font-size: 1.5em;
+  }
+  .Logo {
+    margin-left: 0.5rem;
+    width: 100%;
   }
 }

@@ -2,8 +2,9 @@ import './Navbar.css';
 
 import sacola from 'assets/icons/sacola.svg';
 import shop from 'assets/shop.svg';
+import paleta from 'assets/icons/paleta.svg';
 
-function Navbar() {
+function Navbar(createCell) {
   return (
     <div className="Header">
       <div className="row">
@@ -17,6 +18,18 @@ function Navbar() {
           <span className="Logo__tittle"> Kohaute MarketPlace </span>
         </div>
         <div className="Header__options Options">
+          <button
+            type="button"
+            className="Options__cell Cell"
+            onClick={() => createCell()}
+          >
+            <img
+              src={paleta}
+              width="40px"
+              className="Cell__icon"
+              alt="Adicionar um celular"
+            />
+          </button>
           <div className="Options__bag Bag">
             <img
               src={sacola}
