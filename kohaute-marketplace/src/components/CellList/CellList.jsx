@@ -4,7 +4,7 @@ import { CellService } from 'services/CellService';
 import CellDetailsModal from 'components/CellDetailsModal/CellDetailsModal';
 import './CellList.css';
 
-function CellList() {
+function CellList(createdCell) {
   const [cells, setCell] = useState([]);
   const [chosedCell, setChosedCell] = useState({});
 
@@ -29,6 +29,16 @@ function CellList() {
     const response = await CellService.getById(cellId);
     setCellModal(response);
   };
+
+
+  const addCellOnList = (cell) => {
+    const list = [...cells, cell];
+    setCell(list);
+};
+
+useEffect(() => {
+    if (createdCell) addCellOnList(createdCell);
+}, [createdCell]);
 
   useEffect(() => {
     getList();

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import Modal from 'components/Modal/Modal';
+import { CellService } from 'services/CellService';
 import './AddCellModal.css';
 
-function AddCellModal({ closeModal }) {
+function AddCellModal({ closeModal, onCreateCell }) {
   const form = {
     price: '',
     name: '',
@@ -29,6 +30,24 @@ function AddCellModal({ closeModal }) {
   useEffect(() => {
     canDisableSendButton();
   });
+  const createCell = async () => {
+    const renameWayPhoto = (photoPath) => photoPath.split('\\').pop();
+
+    const { name, description, price, photo } = state;
+
+    const tittle = name;
+
+    const cell = {
+      name: tittle,
+      description,
+      price,
+      photo: `assets/images/${renameWayPhoto(photo)}`,
+    };
+
+    const response = await CellService.create(cell);
+    onCreateCell(response);
+    closeModal();
+  };
   return (
     <Modal closeModal={closeModal}>
       <div className="AddCellModal">
@@ -92,7 +111,14 @@ function AddCellModal({ closeModal }) {
             />
           </div>
 
-          <button type="button" disabled={canDisable} className="AddCellModal__send" >Enviar</button>
+          <button
+            type="button"
+            disabled={canDisable}
+            className="AddCellModal__send"
+            onClick={createCell}
+          >
+            Enviar
+          </button>
         </form>
       </div>
     </Modal>

@@ -31,7 +31,7 @@ function CellListItem({
 
       <div>
         <div className="CellListItem__name">{cell.name}</div>
-        <div className="CellListItem__price">R$ {cell.price.toFixed(2)}</div>
+        <div className="CellListItem__price">R$ {cell.price}</div>
         <div className="CellListItem__description">{cell.description}</div>
         <div className="CellListItem__actions Actions">
           <button

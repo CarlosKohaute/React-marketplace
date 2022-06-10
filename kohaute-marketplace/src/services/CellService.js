@@ -7,20 +7,29 @@ const transformCell = (cell) => {
   return {
     ...cell,
     id: cell._id,
-    name: cell.name
-  }
+    name: cell.name,
+  };
 };
 
-const parseTransformList = (response) => parseResponse(response).then(cells => cells.map(transformCell));
-const parseTransformItem = (response) => parseResponse(response).then(transformCell);
-
-
+const parseTransformList = (response) =>
+  parseResponse(response).then((cells) => cells.map(transformCell));
+const parseTransformItem = (response) =>
+  parseResponse(response).then(transformCell);
 
 export const CellService = {
-  getList: () => fetch(Api.cellList(), { method: 'GET' }).then(parseTransformList),
+  getList: () =>
+    fetch(Api.cellList(), { method: 'GET' }).then(parseTransformList),
   getById: (id) =>
     fetch(Api.cellById(id), { method: 'GET' }).then(parseTransformItem),
-  create: () => fetch(Api.createCell(), { method: 'POST' }).then(parseResponse),
+  create: (cell) =>
+    fetch(Api.createCell(), {
+      method: 'POST',
+      body: JSON.stringify(cell),
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(parseTransformItem),
   updateById: (id) =>
     fetch(Api.updateCellById(id), { method: 'PUT' }).then(parseResponse),
   deleteById: (id) =>

@@ -6,14 +6,16 @@ import './Home.css';
 
 function Home() {
   const [canShowAddCellModal, setCanShowAddCellModal] = useState(false);
+  const [cellForAdd, setCellForAdd] = useState();
   return (
     <div className="Home">
             <Navbar createCell={() => setCanShowAddCellModal(true)} />
       <div className="Home__container">
-        <CellList />{' '}
+        <CellList createdCell={cellForAdd}/>{' '}
         {canShowAddCellModal && (
           <AddCellModal
             closeModal={() => setCanShowAddCellModal(false)}
+            onCreateCell={(cell) => setCellForAdd(cell)}
           />
         )}
       </div>
