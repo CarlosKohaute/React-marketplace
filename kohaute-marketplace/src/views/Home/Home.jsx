@@ -1,5 +1,6 @@
 import CellList from 'components/CellList/CellList';
 import Navbar from 'components/Navbar/Navbar';
+import AddCellModal from 'components/AddCellModal/AddCellModal';
 import './Home.css';
 
 function Home() {
@@ -8,6 +9,7 @@ function Home() {
       <Navbar />
       <div className="Home__container">
         <CellList />
+        <AddCellModal/>
       </div>
     </div>
   );
