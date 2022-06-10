@@ -27,6 +27,9 @@
   border-radius: 5px;
   height: 20px;
   padding: 2px 10px;
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
 }
 
 .AddCellModal__text {
@@ -50,7 +53,7 @@
 }
 
 .AddCellModal__send {
-  background-color: darkviolet;
+  background-color: rgba(146, 67, 180, 0.786);
   cursor: pointer;
   color: white;
   width: 100%;

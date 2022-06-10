@@ -4,7 +4,7 @@ import sacola from 'assets/icons/sacola.svg';
 import shop from 'assets/shop.svg';
 import paleta from 'assets/icons/paleta.svg';
 
-function Navbar(createCell) {
+function Navbar({createCell}) {
   return (
     <div className="Header">
       <div className="row">

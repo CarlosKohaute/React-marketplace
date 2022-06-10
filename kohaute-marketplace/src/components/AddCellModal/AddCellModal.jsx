@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'components/Modal/Modal';
 import './AddCellModal.css';
 
@@ -13,10 +13,26 @@ function AddCellModal({ closeModal }) {
   const handleChange = (e, name) => {
     setState({ ...state, [name]: e.target.value });
   };
+  const [canDisable, setCanDisable] = useState(true);
+
+  const canDisableSendButton = () => {
+    const response = !Boolean(
+      state.description.length &&
+        state.photo.length &&
+        state.name.length &&
+        state.price.length,
+    );
+
+    setCanDisable(response);
+  };
+
+  useEffect(() => {
+    canDisableSendButton();
+  });
   return (
     <Modal closeModal={closeModal}>
       <div className="AddCellModal">
-        <form autoComplete="false">
+        <form autoComplete="off">
           <h2>Adicionar Celular: </h2>
           <div>
             <label className="AddCellModal__text" htmlFor="price">
@@ -28,6 +44,7 @@ function AddCellModal({ closeModal }) {
               placeholder="R$7.000,00"
               value={state.price}
               onChange={(e) => handleChange(e, 'price')}
+              required
             />
           </div>
           <div>
@@ -40,6 +57,7 @@ function AddCellModal({ closeModal }) {
               placeholder="Galaxy S22 Ultra"
               value={state.name}
               onChange={(e) => handleChange(e, 'name')}
+              required
             />
           </div>
           <div>
@@ -53,6 +71,7 @@ function AddCellModal({ closeModal }) {
               "
               value={state.description}
               onChange={(e) => handleChange(e, 'description')}
+              required
             />
           </div>
           <div>
@@ -69,10 +88,11 @@ function AddCellModal({ closeModal }) {
               accept="image/png, image/gif, image/jpeg "
               value={state.photo}
               onChange={(e) => handleChange(e, 'photo')}
+              required
             />
           </div>
 
-          <input className="AddCellModal__send" type="submit" value="Enviar" />
+          <button type="button" disabled={canDisable} className="AddCellModal__send" >Enviar</button>
         </form>
       </div>
     </Modal>

@@ -60,11 +60,11 @@
 }
 
 .Actions__remove {
-  background-color: red;
+  background-color: rgba(186, 67, 67, 0.662);
 }
 
 .Actions__add {
-  background-color: darkviolet;
+  background-color: rgba(146, 67, 180, 0.786)
 }
 
 .Actions__add--fill {
