@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import Modal from 'components/Modal/Modal';
 import { CellService } from 'services/CellService';
-import './AddCellModal.css';
+import './AddEditCellModal.css';
 
-function AddCellModal({ closeModal, onCreateCell }) {
+function AddEditCellModal({ closeModal, onCreateCell }) {
   const form = {
     price: '',
     name: '',
@@ -124,4 +124,4 @@ function AddCellModal({ closeModal, onCreateCell }) {
     </Modal>
   );
 }
-export default AddCellModal;
+export default AddEditCellModal;

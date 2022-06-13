@@ -7,6 +7,9 @@
   display: flex;
   justify-content: space-around;
   cursor: pointer;
+  position: relative;
+  transition: all 0.5s;
+
 }
 
 @media (max-width: 400px) {
@@ -19,10 +22,44 @@
   }
 }
 
+.CellListItem--disable {
+  box-shadow: 0px 0px 7px rgba(146, 67, 180, 0.786);
+}
+
+.CellListItem--disable,
+.CellListItem--disable .CellListItem__price {
+  color: gray;
+}
+
+.CellListItem--disable .CellListItem__badge {
+  display: none;
+}
+
+.CellListItem--disable img {
+  filter: grayscale(100%);
+}
+
+.CellListItem--disable button:disabled {
+  background-color: gray;
+}
+
+.CellListItem__tag {
+  background-color: rgba(146, 67, 180, 0.786) !important;
+  color: white !important;
+  position: absolute;
+  font-size: 0.6em;
+  border-radius: 5px;
+  padding: 5px;
+  top: -15px;
+  left: -10px;
+  letter-spacing: 1px;
+}
+
 .CellListItem > div {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  width: 100%;
 }
 
 .CellListItem__name {
@@ -33,10 +70,11 @@
 
 .CellListItem__description {
   font-size: 0.85em;
+  width: 100%;
 }
 
 .CellListItem__price {
-  color: darkviolet;
+  color: rgba(146, 67, 180, 0.786);
 }
 
 .Actions {

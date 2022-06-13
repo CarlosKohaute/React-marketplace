@@ -66,10 +66,19 @@
 .Cell {
   background: none;
   border: none;
+  transform: translateY(-3px);
+  border-radius: 10px;
+  transition: all 0.5s;
+  padding: 0;
 }
 
 .Cell__icon {
   cursor: pointer;
+  transform: translateY(3px);
+}
+
+.Active--cell {
+  background: rgba(148, 0, 211);
 }
 
 @media (max-width: 1220px) {
@@ -87,14 +96,14 @@
     flex-direction: column;
     row-gap: 20px;
   }
-  .Logo{
+  .Logo {
     margin-left: 2rem;
     width: 15rem;
   }
-  .Logo__icon{
+  .Logo__icon {
     margin-left: 1.5rem;
   }
-  .Logo__tittle{
+  .Logo__tittle {
     margin-left: 1.5rem;
     font-size: 1.5rem;
   }

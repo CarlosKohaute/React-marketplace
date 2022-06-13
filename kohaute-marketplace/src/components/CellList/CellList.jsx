@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import CellListItem from 'components/CellListItem/CellListItem';
 import { CellService } from 'services/CellService';
 import CellDetailsModal from 'components/CellDetailsModal/CellDetailsModal';
+import { ActionMode } from 'constants/index';
 import './CellList.css';
 
-function CellList(createdCell) {
+function CellList({ createdCell, mode, updateCell, deleteCell }) {
   const [cells, setCell] = useState([]);
   const [chosedCell, setChosedCell] = useState({});
 
@@ -28,17 +29,28 @@ function CellList(createdCell) {
   const getCellById = async (cellId) => {
     const response = await CellService.getById(cellId);
     setCellModal(response);
+    const mapper = {
+      [ActionMode.NORMAL]: () => setCellModal(response),
+      [ActionMode.ATUALIZE]: () => updateCell(response),
+      [ActionMode.DELETE]: () => deleteCell(response),
+    };
+
+    mapper[mode]();
   };
 
+  const addCellOnList = useCallback(
+    (cell) => {
+      const list = [...cells, cell];
+      setCell(list);
+    },
+    [cells],
+  );
 
-  const addCellOnList = (cell) => {
-    const list = [...cells, cell];
-    setCell(list);
-};
-
-useEffect(() => {
-    if (createdCell) addCellOnList(createdCell);
-}, [createdCell]);
+  useEffect(() => {
+    if (createdCell && !cells.map(({ id }) => id).includes(createdCell.id)) {
+      addCellOnList(createdCell);
+    }
+  }, [addCellOnList, createdCell, cells]);
 
   useEffect(() => {
     getList();
@@ -48,6 +60,7 @@ useEffect(() => {
     <div className="CellList">
       {cells.map((cell, index) => (
         <CellListItem
+          mode={mode}
           key={`CellListItem-${index}`}
           cell={cell}
           theAmountSelected={chosedCell[index]}

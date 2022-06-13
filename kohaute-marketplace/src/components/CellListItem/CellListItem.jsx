@@ -1,3 +1,4 @@
+import { ActionMode } from 'constants/index';
 import './CellListItem.css';
 
 function CellListItem({
@@ -7,10 +8,12 @@ function CellListItem({
   onRemove,
   onAdd,
   clickItem,
+  mode,
 }) {
   const removeButton = (canRender, index) =>
     Boolean(canRender) && (
       <button
+        disabled={mode !== ActionMode.NORMAL}
         className="Actions__remove"
         onClick={(e) => {
           e.stopPropagation();
@@ -25,16 +28,26 @@ function CellListItem({
     Boolean(canRender) && (
       <span className="CellListItem__badge"> {theAmountSelected} </span>
     );
+  const badgeAction = (canRender) => {
+    if (canRender) return <span className="CellListItem__tag"> {mode} </span>;
+  };
   return (
-    <div className="CellListItem" onClick={() => clickItem(cell.id)}>
+    <div
+      className={`CellListItem ${
+        mode !== ActionMode.NORMAL && 'CellListItem--disable'
+      }`}
+      onClick={() => clickItem(cell.id)}
+    >
+      {' '}
       {badgeCounter(theAmountSelected, index)}
-
+      {badgeAction(mode !== ActionMode.NORMAL)}
       <div>
         <div className="CellListItem__name">{cell.name}</div>
         <div className="CellListItem__price">R$ {cell.price}</div>
         <div className="CellListItem__description">{cell.description}</div>
         <div className="CellListItem__actions Actions">
           <button
+            disabled={mode !== ActionMode.NORMAL}
             className={`Actions__add ${
               !theAmountSelected && 'Actions__add--fill'
             }`}

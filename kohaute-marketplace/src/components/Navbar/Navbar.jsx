@@ -1,10 +1,12 @@
 import './Navbar.css';
+import { ActionMode } from 'constants/index';
 
 import sacola from 'assets/icons/sacola.svg';
 import shop from 'assets/shop.svg';
 import paleta from 'assets/icons/paleta.svg';
+import atualizar from 'assets/icons/atualizar.svg';
 
-function Navbar({createCell}) {
+function Navbar({ createCell, updateCell, mode }) {
   return (
     <div className="Header">
       <div className="row">
@@ -18,6 +20,20 @@ function Navbar({createCell}) {
           <span className="Logo__tittle"> Kohaute MarketPlace </span>
         </div>
         <div className="Header__options Options">
+          <button
+            type="button"
+            className={`Options__cell  Cell ${
+              mode === ActionMode.ATUALIZE && 'Active--cell'
+            }`}
+            onClick={() => updateCell()}
+          >
+            <img
+              src={atualizar}
+              width="40px"
+              className="Cell__icon"
+              alt="Editar celular"
+            />
+          </button>
           <button
             type="button"
             className="Options__cell Cell"
