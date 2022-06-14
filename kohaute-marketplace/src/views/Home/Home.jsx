@@ -82,10 +82,8 @@ function Home() {
             closeModal={handleCloseModal}
             onDeleteCell={(cell) => setRemovedCell(cell)}
           />
-        )}{
-          canOpenBag &&
-          <SacolaModal closeModal={() => setCanOpenBag(false)} />
-        }
+        )}
+        {canOpenBag && <SacolaModal closeModal={() => setCanOpenBag(false)} />}
       </div>
     </div>
   );

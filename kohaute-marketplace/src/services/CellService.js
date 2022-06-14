@@ -3,7 +3,7 @@ import { Api } from 'helpers/Api';
 const parseResponse = (response) => response.json();
 
 const transformCell = (cell) => {
-  const [name] = cell.name;
+
   return {
     ...cell,
     id: cell._id,

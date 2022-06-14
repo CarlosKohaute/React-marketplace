@@ -3,6 +3,8 @@ import CellListItem from 'components/CellListItem/CellListItem';
 import { CellService } from 'services/CellService';
 import CellDetailsModal from 'components/CellDetailsModal/CellDetailsModal';
 import { ActionMode } from 'constants/index';
+import { matchByText } from 'helpers/utils';
+
 import './CellList.css';
 
 function CellList({
@@ -16,6 +18,9 @@ function CellList({
   const selected = JSON.parse(localStorage.getItem('selected')) ?? {};
 
   const [cells, setCell] = useState([]);
+
+  const [cellsFiltred, setcellsFiltred] = useState([]);
+
   const [chosedCell, setChosedCell] = useState(selected);
 
   const [cellModal, setCellModal] = useState(false);
@@ -67,13 +72,22 @@ function CellList({
     },
     [cells],
   );
+
+  const fillByName = ({ target }) => {
+    const list = [...cells].filter(({ name }) =>
+      matchByText(name, target.value),
+    );
+    setcellsFiltred(list);
+  };
   useEffect(() => {
     setSelected();
   }, [setSelected, chosedCell]);
+
   useEffect(() => {
     if (createdCell && !cells.map(({ id }) => id).includes(createdCell.id)) {
       addCellOnList(createdCell);
     }
+    setcellsFiltred(cells);
   }, [addCellOnList, createdCell, cells]);
 
   useEffect(() => {
@@ -81,26 +95,34 @@ function CellList({
   }, [editedCell, removedCell]);
 
   return (
-    <div className="CellList">
-      {cells.map((cell, index) => (
-        <CellListItem
-          mode={mode}
-          key={`CellListItem-${index}`}
-          cell={cell}
-          theAmountSelected={chosedCell[index]}
-          index={index}
-          onAdd={(index) => itemAdd(index)}
-          onRemove={(index) => itemRemove(index)}
-          clickItem={(cellId) => getCellById(cellId)}
-        />
-      ))}
+    <div className="CellList-Wrapper">
+      <input
+        className="CellList-fill"
+        onChange={fillByName}
+        placeholder="Busque um celular pelo nome"
+      />
+      <div className="CellList">
+        {cellsFiltred.map((cell, index) => (
+          <CellListItem
+            mode={mode}
+            key={`CellListItem-${index}`}
+            cell={cell}
+            theAmountSelected={chosedCell[index]}
+            index={index}
+            onAdd={(index) => itemAdd(index)}
+            onRemove={(index) => itemRemove(index)}
+            clickItem={(cellId) => getCellById(cellId)}
+          />
+        ))}
 
-      {cellModal && (
-        <CellDetailsModal
-          cell={cellModal}
-          closeModal={() => setCellModal(false)}
-        />
-      )}
+        {cellModal && (
+          <CellDetailsModal
+            cell={cellModal}
+            closeModal={() => setCellModal(false)}
+          />
+        )}
+      </div>
+     
     </div>
   );
 }
