@@ -80,6 +80,10 @@
 .Active--cell {
   background: rgba(148, 0, 211);
 }
+.Delete--cell {
+  background: rgba(211, 0, 0);
+
+}
 
 @media (max-width: 1220px) {
   .Header {

@@ -6,6 +6,7 @@ import { ActionMode } from 'constants/index';
 import './Home.css';
 
 function Home() {
+  const [editedCell, setEditedCell] = useState();
   const [canShowAddCellModal, setCanShowAddCellModal] = useState(false);
   const [cellForAdd, setCellForAdd] = useState();
   const [cellForEdit, setCellForEdit] = useState();
@@ -31,6 +32,7 @@ function Home() {
     setCellForAdd();
     setCellForDelete();
     setCellForEdit();
+    setatualMode(ActionMode.NORMAL);
   };
 
   return (
@@ -38,6 +40,7 @@ function Home() {
       <Navbar
         mode={atualMode}
         createCell={() => setCanShowAddCellModal(true)}
+        deleteCell={() => handleActions(ActionMode.DELETE)}
         updateCell={() => handleActions(ActionMode.ATUALIZE)}
       />
 
@@ -45,6 +48,7 @@ function Home() {
         <CellList
           mode={atualMode}
           createdCell={cellForAdd}
+          editedCell={editedCell}
           deleteCell={handleDeleteCell}
           updateCell={handleUpdateCell}
         />
@@ -52,6 +56,7 @@ function Home() {
           <AddEditCellModal
             mode={atualMode}
             cellToUpdate={cellForEdit}
+            onUpdateCell={(cell) => setEditedCell(cell)}
             closeModal={handleCloseModal}
             onCreateCell={(cell) => setCellForAdd(cell)}
           />

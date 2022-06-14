@@ -2,13 +2,20 @@ import { useState, useEffect } from 'react';
 import Modal from 'components/Modal/Modal';
 import { CellService } from 'services/CellService';
 import './AddEditCellModal.css';
+import { ActionMode } from 'constants/index';
 
-function AddEditCellModal({ closeModal, onCreateCell }) {
+function AddEditCellModal({
+  closeModal,
+  onCreateCell,
+  mode,
+  cellToUpdate,
+  onUpdateCell,
+}) {
   const form = {
-    price: '',
-    name: '',
-    description: '',
-    photo: '',
+    price: cellToUpdate?.price ?? ' ',
+    name: cellToUpdate?.name ?? ' ',
+    description: cellToUpdate?.description ?? ' ',
+    photo: cellToUpdate?.photo ?? ' ',
   };
   const [state, setState] = useState(form);
   const handleChange = (e, name) => {
@@ -21,7 +28,7 @@ function AddEditCellModal({ closeModal, onCreateCell }) {
       state.description.length &&
         state.photo.length &&
         state.name.length &&
-        state.price.length,
+        String(state.price).length,
     );
 
     setCanDisable(response);
@@ -30,8 +37,8 @@ function AddEditCellModal({ closeModal, onCreateCell }) {
   useEffect(() => {
     canDisableSendButton();
   });
-  const createCell = async () => {
-    const renameWayPhoto = (photoPath) => photoPath.split('\\').pop();
+  const handleSend = async () => {
+    const renameWayPhoto = (photoPath) => photoPath.split(/\\|\//).pop();
 
     const { name, description, price, photo } = state;
 
@@ -44,15 +51,41 @@ function AddEditCellModal({ closeModal, onCreateCell }) {
       photo: `assets/images/${renameWayPhoto(photo)}`,
     };
 
-    const response = await CellService.create(cell);
-    onCreateCell(response);
+    const serviceCall = {
+      [ActionMode.NORMAL]: () => CellService.create(cell),
+      [ActionMode.ATUALIZE]: () =>
+        CellService.updateById(cellToUpdate?.id, cell),
+    };
+
+    const response = await serviceCall[mode]();
+
+    const actionResponse = {
+      [ActionMode.NORMAL]: () => onCreateCell(response),
+      [ActionMode.ATUALIZE]: () => onUpdateCell(response),
+    };
+
+    actionResponse[mode]();
+
+    const reset = {
+      price: '',
+      name: '',
+      description: '',
+      photo: '',
+    };
+
+    setState(reset);
     closeModal();
   };
   return (
     <Modal closeModal={closeModal}>
       <div className="AddCellModal">
         <form autoComplete="off">
-          <h2>Adicionar Celular: </h2>
+          <h2>
+            {' '}
+            {ActionMode.ATUALIZE === mode
+              ? 'Atualizar'
+              : 'Adicionar à'} loja{' '}
+          </h2>
           <div>
             <label className="AddCellModal__text" htmlFor="price">
               Preço:
@@ -105,7 +138,6 @@ function AddEditCellModal({ closeModal, onCreateCell }) {
               id="photo"
               type="file"
               accept="image/png, image/gif, image/jpeg "
-              value={state.photo}
               onChange={(e) => handleChange(e, 'photo')}
               required
             />
@@ -115,9 +147,9 @@ function AddEditCellModal({ closeModal, onCreateCell }) {
             type="button"
             disabled={canDisable}
             className="AddCellModal__send"
-            onClick={createCell}
+            onClick={handleSend}
           >
-            Enviar
+            {ActionMode.NORMAL === mode ? 'Enviar' : 'Atualizar'}
           </button>
         </form>
       </div>

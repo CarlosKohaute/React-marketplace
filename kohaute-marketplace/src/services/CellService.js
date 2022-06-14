@@ -30,8 +30,15 @@ export const CellService = {
         'Content-Type': 'application/json',
       },
     }).then(parseTransformItem),
-  updateById: (id) =>
-    fetch(Api.updateCellById(id), { method: 'PUT' }).then(parseResponse),
+  updateById: (id, cell) =>
+    fetch(Api.updateCellById(id), {
+      method: 'PUT',
+      body: JSON.stringify(cell),
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(parseResponse),
   deleteById: (id) =>
     fetch(Api.deleteCellById(id), { method: 'DELETE' }).then(parseResponse),
 };

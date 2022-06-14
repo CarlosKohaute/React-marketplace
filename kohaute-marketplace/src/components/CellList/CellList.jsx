@@ -5,7 +5,7 @@ import CellDetailsModal from 'components/CellDetailsModal/CellDetailsModal';
 import { ActionMode } from 'constants/index';
 import './CellList.css';
 
-function CellList({ createdCell, mode, updateCell, deleteCell }) {
+function CellList({ createdCell, mode, updateCell, deleteCell, editedCell }) {
   const [cells, setCell] = useState([]);
   const [chosedCell, setChosedCell] = useState({});
 
@@ -54,7 +54,7 @@ function CellList({ createdCell, mode, updateCell, deleteCell }) {
 
   useEffect(() => {
     getList();
-  }, []);
+  }, [editedCell]);
 
   return (
     <div className="CellList">

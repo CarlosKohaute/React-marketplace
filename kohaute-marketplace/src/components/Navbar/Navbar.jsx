@@ -5,8 +5,9 @@ import sacola from 'assets/icons/sacola.svg';
 import shop from 'assets/shop.svg';
 import paleta from 'assets/icons/paleta.svg';
 import atualizar from 'assets/icons/atualizar.svg';
+import deletar from 'assets/icons/deletar.svg';
 
-function Navbar({ createCell, updateCell, mode }) {
+function Navbar({ createCell, updateCell, mode, deleteCell }) {
   return (
     <div className="Header">
       <div className="row">
@@ -32,6 +33,20 @@ function Navbar({ createCell, updateCell, mode }) {
               width="40px"
               className="Cell__icon"
               alt="Editar celular"
+            />
+          </button>
+          <button
+            type="button"
+            className={`Options__cell Cell ${
+              mode === ActionMode.DELETE && 'Delete--cell'
+            }`}
+            onClick={() => deleteCell()}
+          >
+            <img
+              src={deletar}
+              width="40px"
+              className="Cell__icon"
+              alt="Deletar celular"
             />
           </button>
           <button

@@ -29,13 +29,25 @@ function CellListItem({
       <span className="CellListItem__badge"> {theAmountSelected} </span>
     );
   const badgeAction = (canRender) => {
-    if (canRender) return <span className="CellListItem__tag"> {mode} </span>;
+    if (canRender)
+      return (
+        <span
+          className={`CellListItem__tag ${
+            mode === ActionMode.DELETE && 'CellListItem__tag--delete'
+          }`}
+        >
+          {' '}
+          {mode}{' '}
+        </span>
+      );
   };
   return (
     <div
-      className={`CellListItem ${
+      className={`CellListItem  ${
         mode !== ActionMode.NORMAL && 'CellListItem--disable'
-      }`}
+      }
+      ${mode === ActionMode.DELETE && 'CellListItem--delete'}
+    `}
       onClick={() => clickItem(cell.id)}
     >
       {' '}
