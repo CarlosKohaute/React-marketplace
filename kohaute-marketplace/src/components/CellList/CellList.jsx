@@ -5,9 +5,18 @@ import CellDetailsModal from 'components/CellDetailsModal/CellDetailsModal';
 import { ActionMode } from 'constants/index';
 import './CellList.css';
 
-function CellList({ createdCell, mode, updateCell, deleteCell, editedCell }) {
+function CellList({
+  createdCell,
+  mode,
+  updateCell,
+  deleteCell,
+  editedCell,
+  removedCell,
+}) {
+  const selected = JSON.parse(localStorage.getItem('selected')) ?? {};
+
   const [cells, setCell] = useState([]);
-  const [chosedCell, setChosedCell] = useState({});
+  const [chosedCell, setChosedCell] = useState(selected);
 
   const [cellModal, setCellModal] = useState(false);
 
@@ -15,6 +24,19 @@ function CellList({ createdCell, mode, updateCell, deleteCell, editedCell }) {
     const cell = { [cellIndex]: (chosedCell[cellIndex] || 0) + 1 };
     setChosedCell({ ...chosedCell, ...cell });
   };
+
+  const setSelected = useCallback(() => {
+    if (!cells.length) return;
+
+    const entries = Object.entries(chosedCell);
+    const sacola = entries.map((arr) => ({
+      cellId: cells[arr[0]].id,
+      theAmountSelected: arr[1],
+    }));
+
+    localStorage.setItem('sacola', JSON.stringify(sacola));
+    localStorage.setItem('selected', JSON.stringify(chosedCell));
+  }, [chosedCell, cells]);
 
   const itemRemove = (cellIndex) => {
     const cell = { [cellIndex]: Number(chosedCell[cellIndex] || 0) - 1 };
@@ -45,7 +67,9 @@ function CellList({ createdCell, mode, updateCell, deleteCell, editedCell }) {
     },
     [cells],
   );
-
+  useEffect(() => {
+    setSelected();
+  }, [setSelected, chosedCell]);
   useEffect(() => {
     if (createdCell && !cells.map(({ id }) => id).includes(createdCell.id)) {
       addCellOnList(createdCell);
@@ -54,7 +78,7 @@ function CellList({ createdCell, mode, updateCell, deleteCell, editedCell }) {
 
   useEffect(() => {
     getList();
-  }, [editedCell]);
+  }, [editedCell, removedCell]);
 
   return (
     <div className="CellList">

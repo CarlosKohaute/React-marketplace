@@ -7,7 +7,7 @@ import paleta from 'assets/icons/paleta.svg';
 import atualizar from 'assets/icons/atualizar.svg';
 import deletar from 'assets/icons/deletar.svg';
 
-function Navbar({ createCell, updateCell, mode, deleteCell }) {
+function Navbar({ createCell, updateCell, mode, deleteCell, openBag }) {
   return (
     <div className="Header">
       <div className="row">
@@ -61,7 +61,7 @@ function Navbar({ createCell, updateCell, mode, deleteCell }) {
               alt="Adicionar um celular"
             />
           </button>
-          <div className="Options__bag Bag">
+          <div className="Options__bag Bag"  onClick={openBag}>
             <img
               src={sacola}
               width="40px"

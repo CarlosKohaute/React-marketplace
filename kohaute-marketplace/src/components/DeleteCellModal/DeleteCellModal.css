@@ -1,0 +1,39 @@
+.DeleteCellModal {
+  margin-top: -20px;
+}
+
+.DeleteCellModal > div {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.DeleteCellModal__photo {
+  position: absolute;
+  right: 0px;
+  bottom: 10px;
+  width: 80px;
+}
+
+.DeleteCellModal__confirm,
+.DeleteCellModal__cancel {
+  border: none;
+  border-radius: 5px;
+  font-family: "Exo", sans-serif;
+  padding: 5px;
+  max-width: 280px;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 48%;
+  color: white;
+}
+
+.DeleteCellModal__confirm{
+  background-color: darkviolet;
+}
+
+.DeleteCellModal__cancel {
+  background-color: red;
+}

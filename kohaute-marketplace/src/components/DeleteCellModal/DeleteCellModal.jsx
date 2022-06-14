@@ -14,14 +14,14 @@ function DeleteCellModal({ closeModal, cellToDelete, onDeleteCell }) {
       <div className="DeleteCellModal">
         <h2>Confirmação</h2>
         <p>
-          Você realmente deseja remover <b>{cellToDelete.name}</b> do
+          Você realmente deseja remover o celular selecionado <b>{cellToDelete}</b> do
           marketplace?
         </p>
 
         <img
           className="DeleteCellModal__photo"
-          src={cellToDelete.photo}
-          alt={cellToDelete.name}
+          src={cellToDelete}
+          alt={cellToDelete}
         />
 
         <br />
